@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
+
+
 namespace MillageCalc
 {
 	public class MillageDb
@@ -10,7 +12,8 @@ namespace MillageCalc
 		private SQLiteAsyncConnection connection;
 		public MillageDb(SQLiteAsyncConnection connection)
 		{
-			this.connection = connection;
+            connection.CreateTableAsync<MillageRd>();
+            this.connection = connection;
 		}
 
 		public static MillageDb GetDB(SQLiteAsyncConnection connection)
@@ -21,9 +24,13 @@ namespace MillageCalc
 			}
 			return db;
 		}
-
+        public void CreateTable()
+        {
+            this.connection.CreateTableAsync<MillageRd>();
+        }
 		public Task<int> SaveAsync(MillageRd millageRd)
 		{
+            millageRd.ComputeMillage();
 			if (millageRd.Id > 0)
 			{
 				return this.connection.UpdateAsync(millageRd);
@@ -36,7 +43,25 @@ namespace MillageCalc
 
 		public Task<List<MillageRd>> GetListAsync()
 		{
-			return this.connection.Table<MillageRd>().ToListAsync();
-		}
+            try
+            {
+                return this.connection.Table<MillageRd>().OrderByDescending(xx => xx.Id).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                var a = ex;
+
+            }
+            return this.connection.Table<MillageRd>().OrderByDescending(xx => xx.Id).ToListAsync();
+        }
+
+        public Task<MillageRd> Find(int id)
+        {
+            return this.connection.GetAsync<MillageRd>(id);
+        }
+        public Task<int> Delete(MillageRd item)
+        {
+            return this.connection.DeleteAsync(item);
+        }
 	}
 }

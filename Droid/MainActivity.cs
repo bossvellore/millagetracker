@@ -14,31 +14,50 @@ namespace MillageCalc.Droid
 	[Activity(Label = "MillageCalc", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
 
-		protected override void OnCreate(Bundle savedInstanceState)
+        MillageDb millageDb;
+        List<MillageRd> millages;
+        ListView mlv;
+
+        protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
+            
 
-			// Get our button from the layout resource,
-			// and attach an event to it
+            millageDb = MillageDb.GetDB(DataConnection.GetConnection());
+            millageDb.CreateTable();
+            // Get our button from the layout resource,
+            // and attach an event to it
 
+            mlv = FindViewById<ListView>(Resource.Id.millageListView);
+            mlv.ItemClick += Mlv_ItemClick;
 
-		}
+        }
 
-		protected override void OnResume()
+        private void Mlv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var addMillageIntent = new Intent(this, typeof(AddMillageActivity));
+            addMillageIntent.PutExtra("Edit_Millage_Id", millages[e.Position].Id);
+            StartActivity(addMillageIntent);
+        }
+
+        protected async override void OnResume()
 		{
 			base.OnResume();
-			MillageDb millageDb = MillageDb.GetDB(DataConnection.GetConnection());
-			Task<List<MillageRd>> millages = millageDb.GetListAsync();
-			MillageListAdapter mlAdapter = new MillageListAdapter(this, millages);
-			ListView mlv = FindViewById<ListView>(Resource.Id.millageListView);
-			mlv.Adapter = mlAdapter;
-		}
+            millages = await millageDb.GetListAsync();
+            if (millages.Count > 0)
+            {
+                MillageListAdapter mlAdapter = new MillageListAdapter(this, millages);
+                FindViewById<ListView>(Resource.Id.millageListView).Adapter = mlAdapter;
+            }
 
+
+
+        }
+        
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			MenuInflater.Inflate(Resource.Menu.menu , menu);

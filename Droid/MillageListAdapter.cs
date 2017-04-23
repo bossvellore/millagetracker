@@ -9,12 +9,12 @@ namespace MillageCalc.Droid
 {
 	public class MillageListAdapter : BaseAdapter<MillageRd>
 	{
-		MillageRd[] items;
+        List<MillageRd> items;
 		Activity context;
-		public MillageListAdapter(Activity context, Task<List<MillageRd>> items) : base()
+		public MillageListAdapter(Activity context, List<MillageRd> items) : base()
 		{
 			this.context = context;
-			this.items = items.Result.ToArray();
+            this.items = items;
 		}
 		public override long GetItemId(int position)
 		{
@@ -26,7 +26,7 @@ namespace MillageCalc.Droid
 		}
 		public override int Count
 		{
-			get { return items.Length; }
+			get { return items.Count; }
 		}
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
@@ -34,8 +34,10 @@ namespace MillageCalc.Droid
 			if (view == null) // otherwise create a new one
 				view = context.LayoutInflater.Inflate(Resource.Layout.MillageListItem, null);
 			view.FindViewById<TextView>(Resource.Id.startKm).Text = items[position].StartKm.ToString();
-
-			return view;
+            view.FindViewById<TextView>(Resource.Id.endKm).Text = items[position].EndKm.ToString();
+            view.FindViewById<TextView>(Resource.Id.fuel).Text = items[position].Fuel.ToString();
+            view.FindViewById<TextView>(Resource.Id.millage).Text = items[position].Millage.ToString();
+            return view;
 		}
 	}
 }
