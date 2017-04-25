@@ -54,18 +54,26 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
+        android:id="@+id/linearLayout2"
+        android:background="@color/my_gray">
         <TextView
             android:text=" Millage :"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView4" />
+            android:id="@+id/textView4"
+            android:shadowColor="#fff0f8ff"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="9"
+            android:textStyle="bold"
+            android:background="@color/my_blue" />
         <TextView
             android:text="00"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/millage" />
+            android:id="@+id/millage"
+            android:textColor="@color/my_green" />
     </LinearLayout>
 </LinearLayout>

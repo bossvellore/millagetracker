@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using Android.Views;
 using Android.Content;
+using static Android.Views.View;
+using static Android.Widget.AdapterView;
 
 namespace MillageCalc.Droid
 {
@@ -18,7 +20,7 @@ namespace MillageCalc.Droid
         MillageDb millageDb;
         List<MillageRd> millages;
         ListView mlv;
-
+        MillageListAdapter mlAdapter;
         protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -34,7 +36,42 @@ namespace MillageCalc.Droid
 
             mlv = FindViewById<ListView>(Resource.Id.millageListView);
             mlv.ItemClick += Mlv_ItemClick;
+            mlv.ContextMenuCreated += Mlv_ContextMenuCreated;
+            
+            //mlv.SetOnContextClickListener( new IOnContextClickListener() )
+        }
 
+        private void Mlv_ContextClick(object sender, View.ContextClickEventArgs e)
+        {
+            
+        }
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            base.OnCreateContextMenu(menu, v, menuInfo);
+            //MenuInflater.Inflate(Resource.Menu.millageListMenu, menu);
+        }
+
+        public override bool OnContextItemSelected(IMenuItem item)
+        {
+           
+            AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.MenuInfo;
+            
+            switch (item.ItemId)
+            {
+                
+                case Resource.Id.deleteMenuItem:
+                    millageDb.Delete(millages[info.Position]);
+                    millages.RemoveAt(info.Position);
+                    mlAdapter.NotifyDataSetChanged();
+                    break;
+            }
+            return base.OnContextItemSelected(item);
+        }
+        private void Mlv_ContextMenuCreated(object sender, View.CreateContextMenuEventArgs e)
+        {
+            MenuInflater.Inflate(Resource.Menu.millageListMenu, e.Menu);
+            //throw new NotImplementedException();
         }
 
         private void Mlv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -50,8 +87,9 @@ namespace MillageCalc.Droid
             millages = await millageDb.GetListAsync();
             if (millages.Count > 0)
             {
-                MillageListAdapter mlAdapter = new MillageListAdapter(this, millages);
+                this.mlAdapter = new MillageListAdapter(this, millages);
                 FindViewById<ListView>(Resource.Id.millageListView).Adapter = mlAdapter;
+                mlAdapter.NotifyDataSetChanged();
             }
 
 

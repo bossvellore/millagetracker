@@ -3,4 +3,6 @@
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">MillageCalc.Droid</string>
 	<string name="addMenuItem">Add</string>
+  <string name="editMenuItem">Edit</string>
+  <string name="deleteMenuItem">Del</string>
 </resources>

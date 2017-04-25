@@ -41,47 +41,75 @@ namespace MillageCalc.Droid
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int my_blue = 2130968576;
+			
+			// aapt resource value: 0x7f040003
+			public const int my_gray = 2130968579;
+			
+			// aapt resource value: 0x7f040001
+			public const int my_green = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int my_purple = 2130968578;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000c
-			public const int addMenuItem = 2131099660;
+			// aapt resource value: 0x7f08000c
+			public const int addMenuItem = 2131230732;
 			
-			// aapt resource value: 0x7f060005
-			public const int endKm = 2131099653;
+			// aapt resource value: 0x7f08000d
+			public const int deleteMenuItem = 2131230733;
 			
-			// aapt resource value: 0x7f060003
-			public const int fuel = 2131099651;
+			// aapt resource value: 0x7f080005
+			public const int endKm = 2131230725;
 			
-			// aapt resource value: 0x7f060008
-			public const int linearLayout1 = 2131099656;
+			// aapt resource value: 0x7f080003
+			public const int fuel = 2131230723;
 			
-			// aapt resource value: 0x7f060009
-			public const int linearLayout2 = 2131099657;
+			// aapt resource value: 0x7f080008
+			public const int linearLayout1 = 2131230728;
 			
-			// aapt resource value: 0x7f06000b
-			public const int millage = 2131099659;
+			// aapt resource value: 0x7f080009
+			public const int linearLayout2 = 2131230729;
 			
-			// aapt resource value: 0x7f060007
-			public const int millageListView = 2131099655;
+			// aapt resource value: 0x7f08000b
+			public const int millage = 2131230731;
 			
-			// aapt resource value: 0x7f060006
-			public const int saveBtn = 2131099654;
+			// aapt resource value: 0x7f080007
+			public const int millageListView = 2131230727;
 			
-			// aapt resource value: 0x7f060001
-			public const int startKm = 2131099649;
+			// aapt resource value: 0x7f080006
+			public const int saveBtn = 2131230726;
 			
-			// aapt resource value: 0x7f060000
-			public const int textView1 = 2131099648;
+			// aapt resource value: 0x7f080001
+			public const int startKm = 2131230721;
 			
-			// aapt resource value: 0x7f060002
-			public const int textView2 = 2131099650;
+			// aapt resource value: 0x7f080000
+			public const int textView1 = 2131230720;
 			
-			// aapt resource value: 0x7f060004
-			public const int textView3 = 2131099652;
+			// aapt resource value: 0x7f080002
+			public const int textView2 = 2131230722;
 			
-			// aapt resource value: 0x7f06000a
-			public const int textView4 = 2131099658;
+			// aapt resource value: 0x7f080004
+			public const int textView3 = 2131230724;
+			
+			// aapt resource value: 0x7f08000a
+			public const int textView4 = 2131230730;
 			
 			static Id()
 			{
@@ -118,8 +146,11 @@ namespace MillageCalc.Droid
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int menu = 2131034112;
+			// aapt resource value: 0x7f070000
+			public const int menu = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int millageListMenu = 2131165185;
 			
 			static Menu()
 			{
@@ -150,14 +181,20 @@ namespace MillageCalc.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int addMenuItem = 2130968578;
+			// aapt resource value: 0x7f050002
+			public const int addMenuItem = 2131034114;
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int app_name = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f050004
+			public const int deleteMenuItem = 2131034116;
+			
+			// aapt resource value: 0x7f050003
+			public const int editMenuItem = 2131034115;
+			
+			// aapt resource value: 0x7f050000
+			public const int hello = 2131034112;
 			
 			static String()
 			{
@@ -165,6 +202,22 @@ namespace MillageCalc.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int MyCustomTheme = 2131099648;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
